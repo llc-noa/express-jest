@@ -1,18 +1,12 @@
-const { Get } = require('../src/root');
+const request = require('supertest');
+const app = require('../app.js');
 
-test('status 200 with id', () => {
-    const req = {
-        query: {
-            id: 'ezaki',
-        },
-    };
+const path = '/api/root';
 
-    const res = {
-        status: jest.fn().mockReturnThis(),
-        send: jest.fn().mockReturnThis(),
-    };
+jest.setTimeout(10000);
 
-    Get(req, res);
+test('status 200 with id', async () => {
+    const result = await request(app).get(path).query({ id: 'ezaki' });
 
-    expect(res.status.mock.calls[0][0]).toBe(200);
+    expect(result.statusCode).toBe(200);
 });
