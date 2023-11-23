@@ -9,7 +9,6 @@ describe('正常', () => {
         const result = await request(app).get(path).query({ id: 'ezaki' });
 
         expect(result.statusCode).toBe(200);
-        expect(result.statusCode).toBe(200);
         expect(result.body).toStrictEqual({
             id: 'ezaki',
         });
