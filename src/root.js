@@ -1,17 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const log = require('./common/log');
+const address = require('./common/address');
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     const systemLogger = log.getLogger();
-    systemLogger.debug('test');
-    if (req.query.id) {
-        res.status(200).send({
-            id: req.query.id,
-        });
+    systemLogger.debug(req.query);
+
+    let addressResult = {};
+    if (req.query.postCode) {
+        addressResult = await address.search(req.query.postCode);
+        systemLogger.debug('addressResult:' + addressResult);
     }
 
-    res.status(400).send('Who are you?');
+    res.status(200).send({
+        id: req.query.id,
+        address: addressResult,
+    });
 });
 
 module.exports = router;
