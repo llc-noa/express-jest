@@ -1,17 +1,28 @@
-const axios = require('axios');
 const log = require('./log');
+const axiosBase = require('axios');
+const axios = axiosBase.create({
+    timeout: 2000,
+    headers: {},
+    defaults: {},
+});
 
-const url = 'http://zipcloud.ibsnet.co.jp/api/search?zipcode=';
-
-const search = async (postCode) => {
+exports.search = async (zipcode) => {
     const systemLogger = log.getLogger();
-    const testUrl = url + postCode;
-    systemLogger.debug(testUrl);
-    let result = await axios.get(testUrl);
-    systemLogger.debug(result.data.results[0]);
-    return result.data.results[0];
-};
-
-module.exports = {
-    search,
+    let getData;
+    try {
+        await axios
+            .get(`http://zipcloud.ibsnet.co.jp/api/search?zipcode=${zipcode}`)
+            .then((res) => {
+                if (res && res.status === 200) {
+                    systemLogger.debug(res.data.results[0]);
+                    getData = res.data;
+                }
+            })
+            .catch((error) => {
+                systemLogger.fatal(error.stack);
+            });
+    } catch (e) {
+        systemLogger.fatal(e.stack);
+    }
+    return getData;
 };
