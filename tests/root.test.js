@@ -15,13 +15,13 @@ describe('正常', () => {
                 results: [
                     {
                         address1: '東京都',
-                        address2: '新宿区',
-                        address3: '上落合',
+                        address2: '千代田区',
+                        address3: '飯田橋',
                         kana1: 'ﾄｳｷｮｳﾄ',
-                        kana2: 'ｼﾝｼﾞｭｸｸ',
-                        kana3: 'ｶﾐｵﾁｱｲ',
+                        kana2: 'ﾁﾖﾀﾞｸ',
+                        kana3: 'ｲｲﾀﾞﾊﾞｼ',
                         prefcode: '13',
-                        zipcode: '1610034',
+                        zipcode: '1020072',
                     },
                 ],
                 status: 200,
@@ -29,7 +29,7 @@ describe('正常', () => {
         });
         const result = await request(app)
             .get(path)
-            .query({ id: 'ezaki', postCode: '1610034' });
+            .query({ id: 'ezaki', postCode: '1020072' });
 
         expect(result.statusCode).toBe(200);
         expect(result.body).toStrictEqual({
@@ -38,13 +38,13 @@ describe('正常', () => {
                 results: [
                     {
                         address1: '東京都',
-                        address2: '新宿区',
-                        address3: '上落合',
+                        address2: '千代田区',
+                        address3: '飯田橋',
                         kana1: 'ﾄｳｷｮｳﾄ',
-                        kana2: 'ｼﾝｼﾞｭｸｸ',
-                        kana3: 'ｶﾐｵﾁｱｲ',
+                        kana2: 'ﾁﾖﾀﾞｸ',
+                        kana3: 'ｲｲﾀﾞﾊﾞｼ',
                         prefcode: '13',
-                        zipcode: '1610034',
+                        zipcode: '1020072',
                     },
                 ],
                 status: 200,
