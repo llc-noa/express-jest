@@ -39,7 +39,7 @@ describe('正常', () => {
                     {
                         address1: '東京都',
                         address2: '千代田区',
-                        address3: '飯田',
+                        address3: '飯田橋',
                         kana1: 'ﾄｳｷｮｳﾄ',
                         kana2: 'ﾁﾖﾀﾞｸ',
                         kana3: 'ｲｲﾀﾞﾊﾞｼ',
